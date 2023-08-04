@@ -118,7 +118,9 @@ The API is structured using Express.js, and it follows a RESTful API design. The
              "_id": "product_id_1",
              "productID": "product_123",
              "linkProduct": "https://example.com/product/123",
-             // ...
+             "title": "Product ABC",
+             "price": 49.99,
+             "videoID": "video_id_2"
            }
          }
          ```
@@ -156,7 +158,9 @@ The API is structured using Express.js, and it follows a RESTful API design. The
        {
          "productID": "product_456",
          "linkProduct": "https://example.com/product/456",
-         // ...
+         "title": "Product XYZ",
+         "price": 29.99,
+         "videoID": "video_id_2"
        }
        ```
      - Response:
@@ -167,7 +171,10 @@ The API is structured using Express.js, and it follows a RESTful API design. The
            "data": {
              "_id": "product_id_2",
              "productID": "product_456",
-             // ...
+             "linkProduct": "https://example.com/product/456",
+             "title": "Product XYZ",
+             "price": 29.99,
+             "videoID": "video_id_2"
            }
          }
          ```
@@ -186,7 +193,80 @@ The API is structured using Express.js, and it follows a RESTful API design. The
          }
          ```
 
-   - Other endpoints (PUT and DELETE) follow a similar pattern.
+   - `PUT /products/:productID`
+     - Request: `/products/product_id_2`
+       ```json
+       {
+         "title": "Updated Product XYZ",
+         "price": 39.99
+       }
+       ```
+     - Response:
+       - Success (200 OK):
+         ```json
+         {
+           "success": true,
+           "data": {
+             "_id": "product_id_2",
+             "productID": "product_456",
+             "linkProduct": "https://example.com/product/456",
+             "title": "Updated Product XYZ",
+             "price": 39.99,
+             "videoID": "video_id_2"
+           }
+         }
+         ```
+       - Error (400 Bad Request):
+         ```json
+         {
+           "success": false,
+           "error": "Invalid ProductID"
+         }
+         ```
+         ```json
+         {
+           "success": false,
+           "error": "Product not found"
+         }
+         ```
+       - Error (500 Internal Server Error):
+         ```json
+         {
+           "success": false,
+           "error": "Internal server error"
+         }
+         ```
+
+   - `DELETE /products/:productID`
+     - Request: `/products/product_id_2`
+     - Response:
+       - Success (200 OK):
+         ```json
+         {
+           "success": true,
+           "message": "Product deleted successfully"
+         }
+         ```
+       - Error (400 Bad Request):
+         ```json
+         {
+           "success": false,
+           "error": "Invalid ProductID"
+         }
+         ```
+         ```json
+         {
+           "success": false,
+           "error": "Product not found"
+         }
+         ```
+       - Error (500 Internal Server Error):
+         ```json
+         {
+           "success": false,
+           "error": "Internal server error"
+         }
+         ```
 
 3. **Video Endpoints:**
 
@@ -233,7 +313,6 @@ The API is structured using Express.js, and it follows a RESTful API design. The
          ```
 
 ---
-
 ## How to Run Locally:
 
 1. Clone the repository containing the API code.
