@@ -46,7 +46,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-
 router.put('/:productID', async (req, res) => {
     try {
         const { productID } = req.params;
